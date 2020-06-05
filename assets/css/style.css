@@ -267,6 +267,15 @@ li:first-child { border-left:1px solid #000; }
   padding: 10px 0;
 }
 
+.status,
+.offline { color : #ff0000; }
+
+.online { color : #32CD32; }
+
+.result {
+  padding-top: 70px;
+}
+
 
 
 

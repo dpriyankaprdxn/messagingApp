@@ -32,20 +32,20 @@
 			$this->conn-> close();
 		}
 
-		function insertUser($firstName,$lastName,$email,$password)
+		public function insertUser($firstName,$lastName,$email,$password)
 		{
 			$insert = "insert into users(first_name,last_name,email,password,status)values('".$firstName."','".$lastName."','".$email."','".$password."','1')";
 
 			return $insert;
 		}
 		
-		function escapeString($data) 
+		public function escapeString($data) 
 		{
 			$string = $this->conn->real_escape_string($data);
 			return $string;
 		}
 		
-		function existingUser($email) 
+		public function existingUser($email) 
 		{
 			$result = $this->conn->query("SELECT email FROM users WHERE email='".$email."'");
 			if ($result->num_rows > 0) {
@@ -56,18 +56,23 @@
 			}
 		}
 		
-		function validUser($email) 
+		public function validUser($email) 
 		{
 			$result = $this->conn->query("SELECT * FROM users WHERE email='". $email ."'");
-			if($row = mysqli_fetch_array($result)) {
-				return $row;
+			if ($result->num_rows > 0) {
+				if($row = $result->fetch_assoc()) {
+					return $row;
+				}
+			} 
+			else {
+				return false;
 			}
 		}
 		
-		function getAllUsers($conn) 
+		public function getAllUsers() 
 		{
 			$select = 'select * from users';
-			$result = mysqli_query($conn,$select);
+			$result = $this->conn->query($select);
 			return $result;
 		}
 		
@@ -78,18 +83,15 @@
 			return $result;
 		}
 		
-		function updateUser($conn,$id,$firstName,$lastName,$email,$phone) 
+		public function updateStatus($status,$id) 
 		{
-			$update = "UPDATE users SET first_name ='".$firstName."', last_name ='".$lastName. "', email ='".$email."', phone = '".$phone."' WHERE id = ". $id;
+			$update = "UPDATE users SET status ='".$status."' WHERE id = ". $id;
+			if ($this->conn->query($update) === TRUE) {
+				echo "Record updated successfully";
+			  } else {
+				echo "Error updating record: " . $this->conn->error;
+			}
 			return $update;
 		}
-		
-		function deleteUser($conn,$id) 
-		{
-			$delete = 'DELETE FROM users WHERE id ='. $id;
-			$result = mysqli_query($conn,$delete);
-			return $result;
-		}
-		
 	}
 ?>

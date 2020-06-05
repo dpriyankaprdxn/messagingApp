@@ -9,6 +9,7 @@ if(isset($_SESSION['id'])) {
 }
 
 if(isset($_POST['submit'])){
+  $validation->loginForm();
 }
 
 ?>
@@ -56,6 +57,7 @@ if(isset($_POST['submit'])){
               </div>
               <div class="form-control">
                 <input class="submit" name="submit" type="submit" value="Login">
+                <span class="status"> <?php echo $validation->loginStatus;?></span>
               </div>
           </form>
           <div class="register">

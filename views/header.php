@@ -2,7 +2,7 @@
       <!-- header wrapper start -->
       <div class="wrapper">
         <h1>
-          <a href="index.php" title="Home">
+          <a href="<?php echo $baseUrl; ?>/index.php" title="Home">
             <img src="https://via.placeholder.com/155x37.png" title="logo">
           </a>
         </h1>

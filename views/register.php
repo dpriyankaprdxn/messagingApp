@@ -17,7 +17,7 @@ if(isset($_POST['submit'])){
 <html lang="en"> 
 <head>
   <meta charset="utf-8">
-  <title>Form</title>
+  <title>Register</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Place favicon.ico in the root directory: mathiasbynens.be/notes/touch-icons -->
   <link rel="shortcut icon" href="favicon.ico" />

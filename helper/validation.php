@@ -15,6 +15,7 @@
         public $email  = '';
         public $password = '';
         public $repassword = '';
+        public $loginStatus = '';
         protected $formfName , $formlName , $FormEmail , $formPassword , $formRepassword ;
         private $data;
 
@@ -161,17 +162,19 @@
                 $this->passwordError = "password is required";
               } 
             if ( $this->emailError  == "" &&  $this->passwordError == ""){
-                $row = validUser($conn,$this->email);
+                $db = new Database();
 
-                $passwordVerification = password_verify($password,$row['password']);
-                $count  = mysqli_num_rows($row);
+                $row = $db->validUser($this->email);
 
-                if($count==0 && $passwordVerification == fals) {
-                    echo "Invalid email or Password!";
+                $passwordVerification = password_verify($this->password,$row['password']);
+
+                if($row ==  false && $passwordVerification == false) {
+                    $this->loginStatus='Invalid email or Password!';
                 } 
                 else {
                   $_SESSION['id'] = $row['id'];
-                //   header("Location: http://localhost/loginSystem/");
+                  $db->updateStatus('1',$_SESSION['id']);
+                  header("Location: http://localhost/messagingApp/");
                 }
             }
         }
