@@ -1,3 +1,13 @@
+<?php 
+  session_start();
+
+  if(!isset($_SESSION["id"])) {
+    header('location: http://localhost/messagingApp/views/login.php');
+  }
+
+  require_once 'helper/baseUrl.php';
+
+?>
 <!doctype html>
 <!-- If multi-language site, reconsider usage of html lang declaration here. -->
 <html lang="en"> 
@@ -20,6 +30,11 @@
     <!--header section start-->
     <!--main section start-->
     <main>
+      <?php 
+      if(isset($_SESSION['id'])) {
+        echo $_SESSION['id']; 
+      }
+      ?>
     </main>
     <!--main section end-->
     <!--footer section start-->

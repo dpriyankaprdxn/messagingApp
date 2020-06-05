@@ -10,25 +10,21 @@
           <nav>
             <ul>
               <li>
-                <a href="http://localhost/messagingApp/index.php" title="Home" class="active">Home</a>
+                <a href="<?php echo $baseUrl; ?>/index.php" title="Home" class="active">Home</a>
               </li>
               <li>
               <?php 
                   if(isset($_SESSION["id"])) {
-                    echo "<a href='logout.php' title='Logout'>Logout</a>";
+                    echo "<a href='".$baseUrl."/views/logout.php' title='Logout'>Logout</a>";
                   }
                   else {
-                    echo  "<a href='login.php' title='Login'>Login</a>";
+                    echo  "<a href='".$baseUrl."/views/login.php' title='Login'>Login</a>";
                   }
                   ?>
               </li>
-              <?php
-              echo '<li>';
-                if(isset($_SESSION["id"])) {
-                    echo "<a href='register.php' title='Add User'>Add Uer</a>";
-                  }
-              echo '</li>';
-              ?>
+              <li>
+                <a href='<?php echo $baseUrl; ?>/views/register.php' title='Register'>Register</a>
+              </li>
             </ul>
           </nav>
         </div>

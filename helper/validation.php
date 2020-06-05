@@ -1,4 +1,7 @@
 <?php
+    session_start();
+    require 'database.php';
+
     class Validation
     {
         // Initialize variables to null
@@ -7,14 +10,12 @@
         public $emailError = '';
         public $passwordError = '';
         public $repasswordError = '';
-        public $phoneError = "";
         public $firstName =  '';
         public $lastName = '';
         public $email  = '';
         public $password = '';
         public $repassword = '';
-        public $phone ="";
-        protected $formfName , $formlName , $FormEmail , $formPassword , $formRepassword , $FormPhone ;
+        protected $formfName , $formlName , $FormEmail , $formPassword , $formRepassword ;
         private $data;
 
         // testinput function
@@ -75,26 +76,6 @@
             }
         }
 
-        // function for phone validation
-        public function validatePhone($fphone) 
-        {
-            $this->formPhone = $fphone;
-            if (empty($this->formPhone)) {
-                $this->phoneError = "Phone number is required";
-            } 
-            else {  
-                $this->phone = $this->testInput($this->formPhone);
-                
-                if (strlen($this->formPhone) <= '8') {
-                    $this->phoneError = "Your phone number Must Contain At Least 8 Digits";
-                }   elseif (strlen($this->formPhone) >= '15') {
-                        $this->phoneError = "Your phone number Must Contain maximum 15 Digits";
-                }   elseif (!preg_match("/^[0-9]+$/", $this->phone)) {
-                        $this->phoneError = "Invalid phone number. only number are allow.";
-                }
-            }
-        }
-
         // function for checking password validation and confirm password
         public function validatePassword($fPassword,$fRepassword) 
         {
@@ -136,12 +117,62 @@
         {
             $this->validateFirstName($_POST["firstname"]);
             $this->validateLastName($_POST["lastname"]);
-            $this->validatePhone($_POST["phone"]);
             $this->validateEmail($_POST["email"]);
             $this->validatePassword($_POST["password"],$_POST['repassword']);
             
-            if( $this->fnameError == "" && $this->lnameError == "" && $this->emailError == "" && $this->passwordError == "" && $this->repasswordError == "" &&  $this->phoneError == "" ) {
-                echo 'hi';
+            if( $this->fnameError == "" && $this->lnameError == "" && $this->emailError == "" && $this->passwordError == "" && $this->repasswordError == "" ) {
+            
+                $db = new Database();
+
+                $this->password = password_hash($this->password,PASSWORD_DEFAULT);
+                $existingEmail = $db->escapeString($this->email);
+                $existingUser = $db->existingUser($existingEmail);
+            
+                if ($existingUser)
+                {
+                  header("Location: login.php");
+                }
+                else {
+                  $insert = $db->insertUser($this->firstName,$this->lastName,$this->email,$this->password);
+                
+                  if ($db->conn->query($insert) === TRUE) {
+                    $id = $db->conn->insert_id;
+            
+                    if(isset($_SESSION['id'])) {
+                      echo 'New user add successfully';
+                    }
+                    else {
+                        $_SESSION['id'] = $id;  
+                    }
+                    header("Location: http://localhost/messagingApp/");                    
+                    } 
+                    else {
+                        echo "Error: " . $insert . "<br>" . $db->closeConnection();
+                    }
+                }
+            }
+        }
+
+        // function for login form validation
+        public function loginForm() 
+        {
+            $this->validateEmail($_POST["email"]);
+            if (empty($_POST["password"])) {
+                $this->passwordError = "password is required";
+              } 
+            if ( $this->emailError  == "" &&  $this->passwordError == ""){
+                $row = validUser($conn,$this->email);
+
+                $passwordVerification = password_verify($password,$row['password']);
+                $count  = mysqli_num_rows($row);
+
+                if($count==0 && $passwordVerification == fals) {
+                    echo "Invalid email or Password!";
+                } 
+                else {
+                  $_SESSION['id'] = $row['id'];
+                //   header("Location: http://localhost/loginSystem/");
+                }
             }
         }
     }
