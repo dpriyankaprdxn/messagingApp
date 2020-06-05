@@ -17,7 +17,7 @@
 				$this->password = '';
 				$this->databaseName = "messaging_app";
 				// Create connection
-				$this->conn = new mysqli($this->serverName, $this->userName, $this->password,$this->databaseName,'3308');
+				$this->conn = new mysqli($this->serverName, $this->userName, $this->password,$this->databaseName);
 				// Check connection
 				if ($this->conn->connect_error)
 					die("Connection failed: " . $this->conn->connect_error);
