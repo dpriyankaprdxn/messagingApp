@@ -93,5 +93,12 @@
 			}
 			return $update;
 		}
+
+		public function getUserName($id) 
+		{
+			$getUserName = "SELECT * FROM users WHERE id=".$id."";
+			$result = $this->conn->query($getUserName);
+			return $result->fetch_assoc();
+		}
 	}
 ?>

@@ -263,19 +263,28 @@ li:first-child { border-left:1px solid #000; }
 
 .result li:first-child { text-transform: capitalize; }
 
-.register {
+.register,
+.chat {
   padding: 10px 0;
 }
 
 .status,
 .offline { color : #ff0000; }
 
-.online { color : #32CD32; }
+.online ,
+.sender-msg { color : #32CD32; }
 
 .result {
   padding-top: 70px;
 }
 
+.reciever-msg { color: #1F8DD6; }
+
+.time { color:#666; }
+
+.chat a {
+  color: #1F8DD6;
+}
 
 
 

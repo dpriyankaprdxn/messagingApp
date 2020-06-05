@@ -46,7 +46,7 @@
               echo "<li>".$row['first_name'].' '.$row['last_name'].'</li>';
             }
             else {
-              echo "<li><a href='".$baseUrl."/views/dashboard.php' alt='".$row['first_name'].' '.$row['last_name']."'>".$row['first_name'].' '.$row['last_name'].'</a></li>';
+              echo "<li><a href='".$baseUrl."/views/dashboard.php?id=".$row['id']."' alt='".$row['first_name'].' '.$row['last_name']."'>".$row['first_name'].' '.$row['last_name'].'</a></li>';
             }
             if ($row['status'] == 1) {
               echo '<li class="online">Online</li>';

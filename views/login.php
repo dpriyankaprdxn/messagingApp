@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
       <section class="login">
         <div class="wrapper">
             <h2>Login Here</h2>
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
               <span>* required field.</span>
               <div class='form-container'>
                 <div class="form-group">
