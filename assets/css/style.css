@@ -107,6 +107,43 @@ li {
   Header styling starts here
 =================================*/
 
+header { background: #000; }
+
+header .wrapper {  padding: 15px 0; }
+
+header .wrapper,
+.menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+h1 { 
+  -ms-flex-preferred-size: 15%;
+  flex-basis: 15%;
+}
+
+.menu {
+  -ms-flex-preferred-size: 73%;
+  flex-basis: 73%;
+}
+
+nav {
+ -ms-flex-preferred-size: 85%;
+  flex-basis: 85%;
+}
+
+nav li { padding: 10px 5%; }
+
+nav a {
+  color: #fff;
+  font: bold 14px sans-serif;
+}
+
+.active { color: #feac00; }
 
 
 
@@ -120,9 +157,121 @@ li {
   main styling starts here
 =================================*/
 
+h2 {
+  padding: 30px 0;
+  font: bold 22px sans-serif;
+}
+
+.form-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  position: relative;
+  flex-basis: 48%;
+}
+
+.form-group input {
+  min-width: 70%;
+  padding: 5px 1% 8px;
+  border:none;
+  border-radius:1px;
+  box-shadow:0 0 1px 2px #ddd;
+  margin-top:10px;
+}
+
+label { 
+  padding-top: 15px;
+  display: block; 
+}
+
+.submit {
+  padding: 10px 2%;
+  border:none;
+  border-radius:3px;
+  margin-top:30px;
+  background:#1F8DD6;
+  color:#fff;
+  font-size:16px;
+}
+
+form > span { 
+  margin-bottom: 7px;
+  display: inline-block;
+  color: #ff0000; 
+}
+
+.main-form .error,
+.login .error { 
+  position: absolute;
+  top: 60%;
+  left: 75%;
+  color:#ff0000;  
+  font-size: 12px;
+}
+
+h3 {
+  padding: 30px 0;
+  font: bold 22px sans-serif;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.heading {
+  padding-top : 30px;
+}
+
+.heading li { 
+  border-top:1px solid #000; 
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+li {
+  width: 15%;
+  border: 1px solid #000;
+  border-top:none;
+  border-left: none;
+  text-align: center;
+  padding: 5px 0;
+}
 
 
+li:first-child { border-left:1px solid #000; }
 
+
+.login .form-container { 
+  flex-direction: column;
+}
+
+.login form  {
+  width: 50%;
+  margin : 0 auto;
+}
+
+.login h2,
+.register {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.profile li {
+  flex-basis: 18%;
+}
+
+.result li { font-size: 14px; }
+
+.result li:first-child { text-transform: capitalize; }
+
+.register {
+  padding: 10px 0;
+}
 
 
 
